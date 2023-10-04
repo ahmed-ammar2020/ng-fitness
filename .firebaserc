@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ng-fitness-b2e70"
+  },
+  "targets": {
+    "ng-fitness-b2e70": {
+      "hosting": {
+        "fitness": [
+          "ng-fitness-b2e70"
+        ]
+      }
+    }
+  }
+}

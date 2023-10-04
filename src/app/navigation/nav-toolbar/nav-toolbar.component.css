@@ -1,0 +1,14 @@
+.links-container {
+  width: 20%;
+  margin-left: auto;
+}
+
+ul li {
+  list-style: none;
+}
+
+@media (max-width: 992px) {
+  .links-container {
+    width: 30%;
+  }
+}

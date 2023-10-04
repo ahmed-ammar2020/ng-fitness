@@ -1,0 +1,26 @@
+mat-sidenav-container,
+mat-sidenav,
+mat-sidenav-content {
+  height: 100%;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+main {
+  background-size: cover;
+  min-height: calc(100vh - 64px);
+}
+
+@media (max-width: 530px) {
+  .container {
+    width: 100%;
+  }
+}
+
+.background {
+  background-image: url(../assets/fitness.jpg);
+}

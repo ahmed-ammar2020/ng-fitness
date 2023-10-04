@@ -1,0 +1,14 @@
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <a mat-tab-link routerLink="./new-training" routerLinkActive="active">
+    New training
+  </a>
+  <a mat-tab-link routerLink="./past-trainings" routerLinkActive="active">
+    Past trainings
+  </a>
+</nav>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
+<!-- the changes component based on the url -->
+<section class="mt">
+  <router-outlet></router-outlet>
+</section>

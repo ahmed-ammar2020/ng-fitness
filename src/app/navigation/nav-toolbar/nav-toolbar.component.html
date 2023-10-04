@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    aria-label="Example icon-button with menu icon"
+    (click)="sidenav.toggle()"
+    fxHide.gt-xs
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span
+    ><a routerLink="/" mat-button><h2>Fitness tracker</h2></a></span
+  >
+
+  <nav class="links-container" fxHide.xs>
+    <ul fxLayout fxLayoutAlign="space-around center">
+      <ng-container *ngIf="!(signedin$ | async)">
+        <li>
+          <a mat-button routerLink="/login">Login</a>
+        </li>
+        <li>
+          <a mat-button routerLink="/signup">Signup</a>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="signedin$ | async">
+        <li>
+          <a mat-button routerLink="/training/new-training">Training</a>
+        </li>
+        <li>
+          <a mat-button routerLink="/signout">Signout</a>
+        </li>
+      </ng-container>
+    </ul>
+  </nav>
+</mat-toolbar>

@@ -1,0 +1,124 @@
+<section fxLayout fxLayoutAlign="center center">
+  <form
+    [formGroup]="signupForm"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="20px"
+    (ngSubmit)="submitForm()"
+  >
+    <h2>Signup</h2>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="Enter your name"
+        formControlName="email"
+        name="email"
+      />
+      <mat-hint>hint: Make sure the email is <strong>valid</strong> </mat-hint>
+      <mat-error
+        *ngIf="signupForm.controls.email.errors?.['required'] && signupForm.controls.email.touched &&signupForm.controls.email.dirty"
+      >
+        this field is <strong>required</strong>
+      </mat-error>
+      <mat-error
+        *ngIf="
+              signupForm.controls.email.errors?.['pattern'] &&
+              signupForm.controls.email.touched &&
+              signupForm.controls.email.dirty
+            "
+      >
+        Invalid email format
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        placeholder="Enter a strong password"
+        formControlName="password"
+        type="password"
+        name="password"
+      />
+      <mat-hint>hint: try to make it <strong>strong</strong></mat-hint>
+      <mat-error
+        *ngIf="signupForm.controls.password.errors?.['required'] &&
+            signupForm.controls.password.touched &&
+            signupForm.controls.password.dirty"
+      >
+        this field is <strong>required</strong>
+      </mat-error>
+      <mat-error
+        *ngIf="
+              signupForm.controls.password.errors?.['minlength'] &&
+              signupForm.controls.password.touched &&
+              signupForm.controls.password.dirty
+            "
+      >
+        required at least
+        {{ signupForm.controls.password.errors?.["minlength"].requiredLength }}
+        characters
+      </mat-error>
+      <mat-error
+        *ngIf="
+              signupForm.controls.password.errors?.['maxlength'] &&
+              signupForm.controls.password.touched &&
+              signupForm.controls.password.dirty
+            "
+      >
+        required at most
+        {{ signupForm.controls.password.errors?.["maxlength"].requiredLength }}
+        characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Your birthdate</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="date"
+        placeholder="your birthdate"
+        [max]="maxDate"
+        name="birthdate"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker color="accent" #picker></mat-datepicker
+      ><mat-error
+        *ngIf="
+        signupForm.controls.date.errors?.['required'] 
+      "
+      >
+        Invalid <strong>date</strong></mat-error
+      >
+    </mat-form-field>
+
+    <mat-checkbox fxFlexAlign="start" name="agreed" formControlName="agreed"
+      >Agree to Terms and Conditions.</mat-checkbox
+    >
+
+    <!-- handling errors messages for the whole form -->
+    <mat-error *ngIf="signupForm.errors?.['emailInUse']">
+      sorry, this email is already <strong>in use</strong>
+    </mat-error>
+    <mat-error *ngIf="signupForm.errors?.['noConnection']">
+      Check your internet connection
+    </mat-error>
+
+    <p *ngIf="pending$ | async"><mat-spinner></mat-spinner></p>
+    <button
+      *ngIf="!(pending$ | async)"
+      fxFlexAlign="start"
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="signupForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</section>

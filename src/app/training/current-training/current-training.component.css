@@ -1,0 +1,10 @@
+section {
+  background-color: azure;
+  padding: 50px;
+  width: 50%;
+  border-radius: 20px;
+}
+
+p {
+  color: #3f51b5;
+}

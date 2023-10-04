@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+mat-sidenav {
+  width: 200px;
+}
+
+.link-name {
+  margin-left: 10px;
+}

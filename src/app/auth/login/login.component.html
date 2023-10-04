@@ -1,0 +1,93 @@
+<section fxLayout fxLayoutAlign="center center">
+  <form
+    [formGroup]="signinForm"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="20px"
+    (ngSubmit)="submitForm()"
+  >
+    <h2>Login</h2>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="Enter your name"
+        formControlName="email"
+        name="email"
+      />
+      <mat-error
+        *ngIf="signinForm.controls.email.errors?.['required'] && signinForm.controls.email.touched &&signinForm.controls.email.dirty"
+      >
+        this field is <strong>required</strong>
+      </mat-error>
+      <mat-error
+        *ngIf="
+                signinForm.controls.email.errors?.['pattern'] &&
+                signinForm.controls.email.touched &&
+                signinForm.controls.email.dirty
+              "
+      >
+        Invalid email format
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        placeholder="Enter a strong password"
+        formControlName="password"
+        type="password"
+        name="password"
+      />
+      <mat-error
+        *ngIf="signinForm.controls.password.errors?.['required'] &&
+              signinForm.controls.password.touched &&
+              signinForm.controls.password.dirty"
+      >
+        this field is <strong>required</strong>
+      </mat-error>
+      <mat-error
+        *ngIf="
+                signinForm.controls.password.errors?.['minlength'] &&
+                signinForm.controls.password.touched &&
+                signinForm.controls.password.dirty
+              "
+      >
+        required at least
+        {{ signinForm.controls.password.errors?.["minlength"].requiredLength }}
+        characters
+      </mat-error>
+      <mat-error
+        *ngIf="
+                signinForm.controls.password.errors?.['maxlength'] &&
+                signinForm.controls.password.touched &&
+                signinForm.controls.password.dirty
+              "
+      >
+        required at most
+        {{ signinForm.controls.password.errors?.["maxlength"].requiredLength }}
+        characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-error *ngIf="signinForm.errors?.['emailPasswordInvalid']">
+      email or password are <strong>not</strong> correct
+    </mat-error>
+    <mat-error *ngIf="signinForm.errors?.['noConnection']">
+      Check your internet connection
+    </mat-error>
+    <p *ngIf="pending$ | async">
+      <mat-spinner></mat-spinner>
+    </p>
+    <button
+      *ngIf="!(pending$ | async)"
+      fxFlexAlign="start"
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="signinForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</section>
